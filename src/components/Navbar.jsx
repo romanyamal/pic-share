@@ -15,28 +15,28 @@ export const Navbar = () => {
   useEffect(() => {
     // Determine if a scrollbar is present AND consuming layout space
     // This is typically true on desktop, false on mobile (overlay scrollbars)
-    const isScrollbarPresentAndConsumingSpace =
-      document.documentElement.scrollHeight >
-      document.documentElement.clientHeight;
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-    const isTouchDevice = "ontouchstart" in window;
+    // const isScrollbarPresentAndConsumingSpace =
+    // document.documentElement.scrollHeight >
+    // document.documentElement.clientHeight;
+    // const scrollbarWidth =
+    // window.innerWidth - document.documentElement.clientWidth;
+    // const isTouchDevice = "ontouchstart" in window;
 
     if (showFavoritesModal) {
       document.body.style.overflow = "hidden";
       document.body.style.touchAction = "none";
 
-      if (!isTouchDevice && isScrollbarPresentAndConsumingSpace) {
-        document.body.style.paddingRight = `${scrollbarWidth}px`;
-      }
+      // if (!isTouchDevice && isScrollbarPresentAndConsumingSpace) {
+      // document.body.style.paddingRight = `${scrollbarWidth}px`;
+      // }
     } else {
       document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
+      // document.body.style.paddingRight = "";
       document.body.style.touchAction = "";
     }
     return () => {
       document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
+      // document.body.style.paddingRight = "";
       document.body.style.touchAction = "";
     };
   }, [showFavoritesModal]);
