@@ -4,7 +4,7 @@ import { useFavorites } from "../contexts/FavoritesContext";
 import { Modal } from "./Modal";
 
 import allImageData from "../assets/photos/medium/image_data.json";
-import allPhotosZip from "../assets/photos/alex+sara.zip?url";
+// import allPhotosZip from "../assets/photos/alex+sara.zip?url";
 
 export const Navbar = () => {
   const { removeFavorite, favorites } = useFavorites();
@@ -112,7 +112,7 @@ export const Navbar = () => {
           </button>
           <div className="relative flex items-center group">
             <a
-              href={allPhotosZip}
+              // href={allPhotosZip}
               download="alex+sara.zip"
               className="cursor-pointer"
             >
@@ -131,7 +131,7 @@ export const Navbar = () => {
               </svg>
             </a>
             <span className="absolute -bottom-8 -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none">
-              Download All Images
+              currently not working
             </span>
           </div>
         </div>
