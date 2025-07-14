@@ -13,30 +13,28 @@ export const Navbar = () => {
   const [favoritedImagesDetails, setFavoritedImagesDetails] = useState([]);
 
   useEffect(() => {
-    // Determine if a scrollbar is present AND consuming layout space
-    // This is typically true on desktop, false on mobile (overlay scrollbars)
-    // const isScrollbarPresentAndConsumingSpace =
-    // document.documentElement.scrollHeight >
-    // document.documentElement.clientHeight;
-    // const scrollbarWidth =
-    // window.innerWidth - document.documentElement.clientWidth;
-    // const isTouchDevice = "ontouchstart" in window;
+    const isScrollbarPresentAndConsumingSpace =
+      document.documentElement.scrollHeight >
+      document.documentElement.clientHeight;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    const isTouchDevice = "ontouchstart" in window;
 
     if (showFavoritesModal) {
       document.body.style.overflow = "hidden";
       document.body.style.touchAction = "none";
 
-      // if (!isTouchDevice && isScrollbarPresentAndConsumingSpace) {
-      // document.body.style.paddingRight = `${scrollbarWidth}px`;
-      // }
+      if (!isTouchDevice && isScrollbarPresentAndConsumingSpace) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
     } else {
       document.body.style.overflow = "";
-      // document.body.style.paddingRight = "";
+      document.body.style.paddingRight = "";
       document.body.style.touchAction = "";
     }
     return () => {
       document.body.style.overflow = "";
-      // document.body.style.paddingRight = "";
+      document.body.style.paddingRight = "";
       document.body.style.touchAction = "";
     };
   }, [showFavoritesModal]);
@@ -80,12 +78,14 @@ export const Navbar = () => {
 
   return (
     <nav
-      className="sticky top-0 z-10 flex h-16 items-center bg-white px-4 shadow-sm lg:px-12"
+      className="sticky top-0 z-10 flex h-16 items-center bg-white px-4 shadow-sm lg:px-12 overflow-hidden"
       id="gallery-nav"
     >
       <div className="flex w-full items-center justify-between">
-        <h1 className="text-xl font-bold text-gray-800">a6400_pixels</h1>
-        <div className="flex items-center gap-8">
+        <h1 className="text-md sm:text-xl font-bold text-gray-800">
+          a6400_pixels
+        </h1>
+        <div className="flex items-center gap-4 sm:gap-8">
           <button
             onClick={handleOpenModal}
             className="relative p-1 rounded-full hover:bg-gray-100 transition-colors"
