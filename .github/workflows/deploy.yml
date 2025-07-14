@@ -1,0 +1,50 @@
+name: Deploy React Vite app to Github Pages
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Modify build script in package.json
+        run: |
+          REPO_NAME=$(basename $GITHUB_REPOSITORY)
+          PACKAGE_JSON="package.json"
+          if grep -q '"build":' $PACKAGE_JSON; then
+            echo "Build script exists, modifying it..."
+            jq '.scripts.build = "vite build --base /'"$REPO_NAME"'"' $PACKAGE_JSON > temp.json && mv temp.json $PACKAGE_JSON
+          else
+            echo "No build script found, adding it..."
+            jq '.scripts += { "build": "vite build --base /'"$REPO_NAME"'" }' $PACKAGE_JSON > temp.json && mv temp.json $PACKAGE_JSON
+          fi
+
+      - name: Build Vite app
+        run: npm run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./dist"
+
+      - name: Deploy Github Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
