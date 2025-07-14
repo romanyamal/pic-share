@@ -17,7 +17,7 @@ export const Hero = () => {
 
         <div className="absolute right-0 top-0 h-full w-full p-8 text-white md:px-12 md:pt-14">
           <div className="relative h-full">
-            <h1 className="absolute [writing-mode:sideways-lr] uppercase bottom-5 left-0 whitespace-nowrap md:bottom-1/2 md:translate-y-1/2">
+            <h1 className="absolute vertical-text uppercase bottom-5 left-0 whitespace-nowrap md:bottom-1/2 md:translate-y-1/2">
               <span className="text-[16px] md:text-[18px]">
                 Gallery By a6400_pixels
               </span>
