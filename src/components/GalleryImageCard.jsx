@@ -1,7 +1,7 @@
 import { ImageCard } from "./ImageCard";
 import { useFavorites } from "../contexts/FavoritesContext";
 
-export const GalleryImageCard = ({ image }) => {
+export const GalleryImageCard = ({ image, index, onImageClick }) => {
   const {
     addFavorite,
     removeFavorite,
@@ -13,7 +13,8 @@ export const GalleryImageCard = ({ image }) => {
 
   const paddingTopPercentage = (image.height / image.width) * 100;
 
-  const handleFavoriteToggle = () => {
+  const handleFavoriteToggle = (e) => {
+    e.stopPropagation();
     if (isFavorited) {
       removeFavorite(identifier);
     } else {
@@ -31,7 +32,10 @@ export const GalleryImageCard = ({ image }) => {
 
   return (
     <div className="p-[2px]">
-      <div className="relative group overflow-hidden">
+      <div
+        className="relative group overflow-hidden"
+        onClick={(e) => onImageClick(index, e)}
+      >
         <div
           className="relative w-full bg-gray-100 flex items-center justify-center"
           style={{ paddingBottom: `${paddingTopPercentage}%` }}
@@ -65,6 +69,7 @@ export const GalleryImageCard = ({ image }) => {
               href={getOrigSource(identifier.split(".")[0] + ".jpg")}
               className="cursor-pointer select-none"
               download={identifier.split(".")[0] + ".jpg"}
+              onClick={(e) => e.stopPropagation()}
               aria-label={`Download ${identifier.split(".")[0]}`}
             >
               <span className="pointer-events-none">

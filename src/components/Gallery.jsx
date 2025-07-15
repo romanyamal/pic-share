@@ -3,6 +3,7 @@ import { XMasonry, XBlock } from "react-xmasonry";
 import allImageData from "../assets/photos/medium/image_data.json";
 import { GalleryImageCard } from "./GalleryImageCard";
 import { useMasonryTargetBlockWidth } from "../utils/masonryCalculations";
+import { Lightbox } from "./Lightbox";
 
 export const Gallery = () => {
   const allImages = allImageData;
@@ -98,6 +99,22 @@ export const Gallery = () => {
     };
   }, [loadMore, hasMore]);
 
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [currentLightboxImageIndex, setCurrentLightboxImageIndex] = useState(0);
+
+  const handleImageClick = useCallback((index, event) => {
+    const isButtonClicked = event.target.closest("button, a, svg");
+
+    if (!isButtonClicked) {
+      setCurrentLightboxImageIndex(index);
+      setIsLightboxOpen(true);
+    }
+  }, []);
+
+  const handleCloseLightbox = useCallback(() => {
+    setIsLightboxOpen(false);
+  }, []);
+
   // Use the custom hook to get the calculated targetBlockWidth
   const calculatedMasonryWidth = useMasonryTargetBlockWidth(
     64, // totalModalHorizontalPadding (m-8 on each side)
@@ -120,12 +137,23 @@ export const Gallery = () => {
           updateOnImagesLoad={true}
           targetBlockWidth={calculatedMasonryWidth}
         >
-          {displayedImages.map((image) => (
+          {displayedImages.map((image, index) => (
             <XBlock key={image.filename} className="flex-1 min-w-0">
-              <GalleryImageCard image={image} />
+              <GalleryImageCard
+                image={image}
+                index={index}
+                onImageClick={handleImageClick}
+              />
             </XBlock>
           ))}
         </XMasonry>
+
+        <Lightbox
+          images={allImages}
+          initialImageIndex={currentLightboxImageIndex}
+          isOpen={isLightboxOpen}
+          onClose={handleCloseLightbox}
+        />
 
         <div
           ref={observerTargetRef}
