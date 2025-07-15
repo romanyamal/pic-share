@@ -67,7 +67,7 @@ export const useMasonryTargetBlockWidth = (
       (availableWidthForMasonry - totalGapSpace) / desiredColumns;
 
     const fudgeFactor = 10;
-    return Math.max(150, widthPerColumn - fudgeFactor); // Ensure minimum block width
+    return Math.max(170, widthPerColumn - fudgeFactor); // Ensure minimum block width
   }, [
     currentWindowWidth,
     totalModalHorizontalPadding,

@@ -26,7 +26,7 @@ export const Modal = ({
       >
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 md:top-4 md:right-4 text-gray-500 hover:text-gray-800 text-2xl"
+          className="absolute top-2 right-4 md:top-4 md:right-6 text-gray-500 hover:text-gray-800 text-2xl"
           aria-label="Close modal"
         >
           &times;

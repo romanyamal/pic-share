@@ -1,4 +1,3 @@
-// src/components/Lightbox.jsx
 import { useState, useEffect, useCallback } from "react";
 import { useFavorites } from "../contexts/FavoritesContext";
 
@@ -111,7 +110,7 @@ export const Lightbox = ({ images, initialImageIndex, onClose, isOpen }) => {
       onClick={onClose}
     >
       <div
-        className="relative p-4 sm:p-6 lg:p-8 w-full h-full flex flex-col items-center justify-center"
+        className="relative py-4 sm:py-6 lg:py-8 w-full h-full flex flex-col items-center justify-center"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="absolute top-4 right-4 flex space-x-2 z-10">
@@ -184,7 +183,7 @@ export const Lightbox = ({ images, initialImageIndex, onClose, isOpen }) => {
         </div>
 
         <div className="flex flex-col items-center justify-center w-full h-full pt-12 pb-5">
-          <div className="flex-grow flex-shrink flex items-center justify-center w-full overflow-hidden">
+          <div className="flex-shrink flex items-center justify-center w-full overflow-hidden">
             {isImageLoading && (
               <div className="text-white text-lg">Loading image...</div>
             )}
@@ -198,20 +197,22 @@ export const Lightbox = ({ images, initialImageIndex, onClose, isOpen }) => {
               onError={() => setIsImageLoading(false)}
             />
           </div>
-          <p className="text-gray-500 text-center text-sm sm:text-base mt-2 flex-shrink-0">
-            {currentImage.filename.split(".")[0] + ".jpg"}
-          </p>
+          {!isImageLoading && (
+            <p className="text-gray-500 text-center text-sm sm:text-base mt-2 flex-shrink-0">
+              {currentImage.filename.split(".")[0] + ".jpg"}
+            </p>
+          )}
         </div>
 
         <button
           onClick={handlePrev}
-          className="absolute left-4 bg-black/40 top-1/2 -translate-y-1/2 p-2 rounded-full cursor-pointer hover:scale-130 duration-150 transition-scale"
+          className="absolute left-4 bg-black/40 top-1/2 -translate-y-1/2 p-1 rounded-full cursor-pointer hover:scale-130 duration-150 transition-scale"
           aria-label="Previous image"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="#FFFFFF"
@@ -225,13 +226,13 @@ export const Lightbox = ({ images, initialImageIndex, onClose, isOpen }) => {
 
         <button
           onClick={handleNext}
-          className="absolute right-4 bg-black/40 top-1/2 -translate-y-1/2 p-2 rounded-full hover:scale-130 duration-150 transition-scale cursor-pointer"
+          className="absolute right-4 bg-black/40 top-1/2 -translate-y-1/2 p-1 rounded-full hover:scale-130 duration-150 transition-scale cursor-pointer"
           aria-label="Next image"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="#FFFFFF"

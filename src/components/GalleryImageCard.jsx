@@ -42,7 +42,7 @@ export const GalleryImageCard = ({ image, index, onImageClick }) => {
         >
           <ImageCard imgSrc={getImageSource(identifier)} alt={identifier} />
         </div>
-        <div className="absolute inset-0 h-full w-full transition-opacity flex flex-col justify-between opacity-0 group-hover:opacity-100 bg-gradient-to-b from-black/50 to-transparent">
+        <div className="absolute inset-0 h-full w-full transition-opacity hidden sm:flex sm:flex-col sm:justify-between opacity-0 group-hover:opacity-100 bg-gradient-to-b from-black/50 to-transparent">
           <div className="flex w-full items-center justify-between p-3">
             <div
               className="cursor-pointer select-none"

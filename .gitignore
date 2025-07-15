@@ -14,6 +14,7 @@ dist-ssr
 
 #user specific
 /src/assets/photos/alex+sara.zip
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

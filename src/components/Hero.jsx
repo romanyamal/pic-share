@@ -1,8 +1,15 @@
-import heroImg from "../assets/photos/high/428A9355-2-3648x2392.webp";
+import heroImg from "../assets/photos/hero/428A9355-2-3648x2392.webp";
 
 export const Hero = () => {
+  const scrollToGallery = () => {
+    const galleryNav = document.getElementById("gallery-nav");
+    if (galleryNav) {
+      galleryNav.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section id="#">
+    <section id="hero">
       <div className="relative h-svh w-full overflow-hidden">
         <img
           className="absolute top-0 object-cover object-center w-full h-full"
@@ -47,15 +54,7 @@ export const Hero = () => {
               <span className="text-center text-[18px] ml-2">pic-share</span>
             </a>
             <div className="absolute bottom-0 right-0 md:right-1/2 md:translate-x-1/2">
-              <button
-                onClick={() =>
-                  window.scrollBy({
-                    top: window.innerHeight,
-                    behavior: "smooth",
-                  })
-                }
-                className="cursor-pointer"
-              >
+              <button onClick={scrollToGallery} className="cursor-pointer">
                 <div className="svg-control pointer-events-none w-4 animate-bounce">
                   <svg
                     width="24"

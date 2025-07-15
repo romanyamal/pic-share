@@ -130,7 +130,7 @@ export const Navbar = () => {
                 <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5" />
               </svg>
             </a>
-            <span className="absolute -bottom-8 -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none">
+            <span className="absolute bottom-4 -translate-x-4/5 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none">
               currently not working
             </span>
           </div>
@@ -165,7 +165,7 @@ export const Navbar = () => {
                       className="w-full h-auto object-cover"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 h-full w-full transition-opacity flex flex-col justify-between opacity-0 group-hover:opacity-100 bg-gradient-to-b from-black/50 to-transparent">
+                    <div className="absolute inset-0 h-full w-full transition-opacity flex flex-col justify-between sm:opacity-0 sm:group-hover:opacity-100 bg-gradient-to-b from-black/50 to-transparent">
                       <div className="flex w-full flex-col items-center justify-center m-auto gap-4 md:gap-8">
                         <div
                           className="cursor-pointer select-none"

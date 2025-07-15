@@ -20,11 +20,26 @@ export const Gallery = () => {
 
   const [showFloatingBackToTop, setShowFloatingBackToTop] = useState(false);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
+  const [isBodyScrollLocked, setIsBodyScrollLocked] = useState(false);
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsBodyScrollLocked(document.body.style.overflow === "hidden");
     });
+
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["style"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToHero = () => {
+    const heroSection = document.getElementById("hero");
+    if (heroSection) {
+      heroSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const handleScroll = useCallback(() => {
@@ -115,20 +130,13 @@ export const Gallery = () => {
     setIsLightboxOpen(false);
   }, []);
 
-  // Use the custom hook to get the calculated targetBlockWidth
-  const calculatedMasonryWidth = useMasonryTargetBlockWidth(
-    64, // totalModalHorizontalPadding (m-8 on each side)
-    16, // columnGap (gap-4)
-    4, // effectiveMaxColumns (your XMasonry maxColumns prop)
-    [
-      // Custom breakpoints if you want to override defaults in the hook
-      { width: 0, columns: 2 },
-      { width: 640, columns: 2 },
-      { width: 768, columns: 3 },
-      { width: 1024, columns: 4 },
-      { width: 1440, columns: 4 },
-    ]
-  );
+  const calculatedMasonryWidth = useMasonryTargetBlockWidth(64, 16, 4, [
+    { width: 0, columns: 2 },
+    { width: 640, columns: 2 },
+    { width: 768, columns: 3 },
+    { width: 1024, columns: 4 },
+    { width: 1440, columns: 4 },
+  ]);
   return (
     <section id="gallery-nav" className="scroll-smooth">
       <div className="px-2 sm:px-8 py-2">
@@ -163,8 +171,8 @@ export const Gallery = () => {
             <p className="text-purple-800">Loading more images...</p>
           ) : (
             <button
-              onClick={hasMore ? loadMore : scrollToTop}
-              className="py-2 px-4 bg-purple-200 text-purple-800 rounded hover:bg-purple-300 transition-colors"
+              onClick={hasMore ? loadMore : scrollToHero}
+              className="py-2 px-4 bg-purple-200 text-purple-800 rounded hover:bg-purple-300 transition-colors cursor-pointer"
             >
               {hasMore ? "Load More" : "Back to top"}
             </button>
@@ -174,10 +182,12 @@ export const Gallery = () => {
 
       {showFloatingBackToTop && (
         <button
-          onClick={scrollToTop}
-          className="fixed bottom-4 right-4 z-50
+          onClick={scrollToHero}
+          className={`fixed bottom-4 right-4 z-50
                       bg-[#363636] bg-opacity-30 rounded-full w-12 h-12 flex items-center justify-center
-                      shadow-lg transition-opacity duration-300 ease-in-out cursor-pointer"
+                      shadow-lg transition-opacity duration-300 ease-in-out cursor-pointer ${
+                        isBodyScrollLocked ? "hidden" : ""
+                      }`}
           aria-label="Back to top"
         >
           <svg
